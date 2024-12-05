@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <chrono>
 
 class Report {
     std::vector<int> levels;
@@ -41,6 +42,7 @@ int main(int argc, char** argv) {
     std::string filename = argv[1];
     std::ifstream input_file {filename};
 
+    auto start {std::chrono::steady_clock::now()};
     std::vector<Report> reports{};
     std::string report_src {};
     while (getline(input_file, report_src, '\n')) {
@@ -59,7 +61,11 @@ int main(int argc, char** argv) {
         if (report.isSafe())
             safe_report_count++;
     }
+    auto end {std::chrono::steady_clock::now()};
+
+    std::chrono::duration<double> elapsed_time {end - start};
 
     std::cout << "There are " << safe_report_count << " safe reports out of " << reports.size()
               << " reports.\n";
+    std::cout << "Elapsed analysis time: " << elapsed_time.count() << "s\n";
 }
