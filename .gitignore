@@ -5,3 +5,5 @@ cmake_install.cmake
 bin
 input
 test_input
+.cache
+compile_commands.json
