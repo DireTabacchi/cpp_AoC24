@@ -32,8 +32,10 @@ reduce this number, which I believed would significantly reduce my execution tim
 So, the first thing I did was look through the `check_loop` function. The first thing I noticed was
 I was calculating the guard's position every time from the map, which is a pretty long string to
 look through. I made the guard's position a parameter of the function, and saw my execution time
-decrease slightly, but there were still almost just as many `step`s being executed. What could I
-do next?
+decrease slightly, but there were still almost just as many `step`s being executed. I also reduced
+the number of times a particular position was needed to be encountered from a certain direction. In
+other words, if you saw that position before, report that indeed there was a loop. Now, what could
+I do next?
 
 The next thing I noticed was taking a lot of steps was just moving the guard forward. Before, every
 iteration through the main `while` loop in `check_loop` was only moving the guard forward by 1
